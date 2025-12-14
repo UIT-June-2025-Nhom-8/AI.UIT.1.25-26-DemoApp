@@ -1,0 +1,28 @@
+# Render.com deployment configuration
+# See: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: vietnam-house-price-api
+    env: python
+    region: singapore  # or another region closer to Vietnam
+    plan: free  # or starter/standard for production
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: SECRET_KEY
+        generateValue: true  # Auto-generate secure secret key
+      - key: DEBUG
+        value: False
+      - key: HUGGINGFACE_TOKEN
+        sync: false  # Set this manually in Render dashboard
+      - key: ALLOWED_ORIGINS
+        value: "*"  # Update with your frontend domain
+      - key: DEFAULT_MODEL
+        value: lightgbm
+      - key: LOG_LEVEL
+        value: INFO
+    healthCheckPath: /api/v1/health
+    autoDeploy: true  # Auto-deploy on git push
