@@ -94,6 +94,25 @@ async def root():
     }
 
 
+# Health check endpoint for deployment platforms (Render, Railway, etc.)
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint at root level for deployment platforms
+    Returns basic health status without dependencies
+    """
+    try:
+        models_count = len(model_service.get_available_models())
+    except:
+        models_count = 0
+
+    return {
+        "status": "healthy",
+        "version": settings.APP_VERSION,
+        "models_loaded": models_count
+    }
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
