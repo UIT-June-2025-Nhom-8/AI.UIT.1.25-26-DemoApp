@@ -37,9 +37,8 @@ class Settings(BaseSettings):
 
     # Model files - matching your saved models (updated timestamps)
     MODEL_FILES: dict = {
-        "lightgbm": "lightgbm_regressor_20251216_202202.pkl",
-        "random_forest": "random_forest_regressor_20251216_202201.pkl",
-        "xgboost": "xgboost_regressor_20251216_202202.pkl",
+        "lightgbm": "lightgbm_regressor_20251220_175243.pkl",
+        "xgboost": "xgboost_regressor_20251220_175243.pkl",
     }
 
     # Preprocessing artifacts
