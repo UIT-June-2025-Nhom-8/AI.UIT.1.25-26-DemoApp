@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import type { PredictionResponse, EnsemblePredictionResponse } from '@/types'
-import { formatPrice, formatNumber } from '@/lib/utils'
+import { formatPrice } from '@/lib/utils'
 
 interface PredictionResultProps {
   result: PredictionResponse | EnsemblePredictionResponse

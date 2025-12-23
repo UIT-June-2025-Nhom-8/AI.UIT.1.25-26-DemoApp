@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles, Edit3, TrendingUp, AlertCircle, RotateCcw, Layers, FormInput } from 'lucide-react'
 import { Layout } from '@/components/layout/Layout'
