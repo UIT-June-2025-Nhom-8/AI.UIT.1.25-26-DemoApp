@@ -1,5 +1,5 @@
 # Vietnam Housing Price Prediction Backend - Requirements
-# Python Version: 3.9+
+# Python Version: 3.13.5
 
 # FastAPI Framework
 fastapi>=0.104.0

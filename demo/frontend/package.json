@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "start": "serve -s dist -l 3000",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
@@ -25,6 +26,7 @@
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.68.0",
     "react-router-dom": "^7.10.1",
+    "serve": "^14.2.4",
     "tailwind-merge": "^2.6.0",
     "zod": "^3.25.76",
     "zustand": "^5.0.9"

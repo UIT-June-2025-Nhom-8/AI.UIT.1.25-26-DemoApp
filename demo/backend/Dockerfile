@@ -1,11 +1,12 @@
 # ============================================================================
 # Multi-stage Docker build for Vietnam Housing Price Prediction API
+# Python 3.13.5 | Production-Ready | Optimized for Render/Railway
 # ============================================================================
 
 # -----------------------------------------------------------------------------
 # Stage 1: Builder - Install dependencies
 # -----------------------------------------------------------------------------
-FROM python:3.9-slim as builder
+FROM python:3.13.5-slim AS builder
 
 # Metadata
 LABEL maintainer="CS106.TTNT Team"
@@ -33,12 +34,13 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # -----------------------------------------------------------------------------
 # Stage 2: Runtime - Final minimal image
 # -----------------------------------------------------------------------------
-FROM python:3.9-slim
+FROM python:3.13.5-slim
 
 # Metadata
 LABEL maintainer="CS106.TTNT Team"
 LABEL description="Vietnam Housing Price Prediction API - Production"
 LABEL version="1.0"
+LABEL python.version="3.13.5"
 
 # Set working directory
 WORKDIR /app
