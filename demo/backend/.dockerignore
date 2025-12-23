@@ -1,12 +1,26 @@
-# Python
+# ============================================================================
+# .dockerignore - Exclude files from Docker build context
+# Purpose: Reduce image size and build time
+# ============================================================================
+
+# -----------------------------------------------------------------------------
+# Python Runtime Files (CRITICAL - These add significant size)
+# -----------------------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyc
 .Python
+
+# Python environments (NEVER include in image)
 env/
 venv/
 ENV/
+.venv/
+virtualenv/
+
+# Python build artifacts
 build/
 develop-eggs/
 dist/
@@ -22,34 +36,186 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+pip-log.txt
+pip-delete-this-directory.txt
 
+# -----------------------------------------------------------------------------
+# Development & Testing Files (NOT needed in production)
+# -----------------------------------------------------------------------------
 # Testing
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.tox/
+.nox/
+*.cover
+*.py,cover
+.hypothesis/
+pytest_cache/
 
-# IDEs
+# Jupyter Notebooks (development only)
+*.ipynb
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Development scripts
+run.sh
+test*.py
+*_test.py
+tests/
+test/
+
+# -----------------------------------------------------------------------------
+# IDEs & Editors (NOT needed)
+# -----------------------------------------------------------------------------
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.bak
+.project
+.pydevproject
+.settings/
+*.sublime-*
 
-# OS
+# -----------------------------------------------------------------------------
+# OS Files (NOT needed)
+# -----------------------------------------------------------------------------
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Env files
+# -----------------------------------------------------------------------------
+# Environment & Configuration Files (Security - use env vars instead)
+# -----------------------------------------------------------------------------
 .env
+.env.*
 .env.local
+.env.production
+.env.development
+!.env.example  # Keep example file only
 
-# Git
+# -----------------------------------------------------------------------------
+# Git & Version Control (NOT needed)
+# -----------------------------------------------------------------------------
 .git/
 .gitignore
+.gitattributes
+.gitmodules
+.github/
 
-# Docs
+# -----------------------------------------------------------------------------
+# Documentation Files (NOT needed for runtime)
+# -----------------------------------------------------------------------------
 README.md
+README
+README.txt
+LICENSE
+LICENSE.txt
+CHANGELOG.md
+CONTRIBUTING.md
 docs/
+*.md
+!BUILD_DEPLOY.md  # May want to keep this
 
-# Logs
+# -----------------------------------------------------------------------------
+# Deployment Configuration Files (NOT needed inside container)
+# -----------------------------------------------------------------------------
+docker-compose.yml
+docker-compose.*.yml
+Dockerfile*
+.dockerignore
+render.yaml
+railway.json
+.railway/
+heroku.yml
+Procfile
+
+# -----------------------------------------------------------------------------
+# Large Archive Files (CRITICAL - These add MASSIVE size)
+# -----------------------------------------------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.bz2
+*.gz
+
+# Specifically exclude model archives if models/ already extracted
+models.zip
+models.tar.gz
+
+# -----------------------------------------------------------------------------
+# Logs & Temporary Files (NOT needed)
+# -----------------------------------------------------------------------------
 *.log
+*.log.*
+logs/
+*.tmp
+*.temp
+tmp/
+temp/
+
+# -----------------------------------------------------------------------------
+# CI/CD Files (NOT needed)
+# -----------------------------------------------------------------------------
+.gitlab-ci.yml
+.travis.yml
+azure-pipelines.yml
+.circleci/
+.github/workflows/
+
+# -----------------------------------------------------------------------------
+# Database Files (Should be external)
+# -----------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# -----------------------------------------------------------------------------
+# Media & Asset Files (If not needed)
+# -----------------------------------------------------------------------------
+# Uncomment if you have large media files not needed in production
+# *.mp4
+# *.avi
+# *.mov
+# images/
+# media/
+
+# -----------------------------------------------------------------------------
+# Node.js (If you have any frontend build artifacts)
+# -----------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# -----------------------------------------------------------------------------
+# Security & Secrets (NEVER include)
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.cert
+*.crt
+secrets/
+.secrets/
+
+# -----------------------------------------------------------------------------
+# Keep These Files (Whitelist - use ! to negate ignore)
+# -----------------------------------------------------------------------------
+# !app/
+# !models/
+# !libs/
+# !requirements.txt

@@ -1,0 +1,61 @@
+# Docker Compose for local development and testing
+# Vietnam Housing Price Prediction API
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vietnam-house-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Application settings
+      - PORT=8000
+      - DEBUG=True
+      - LOG_LEVEL=INFO
+
+      # API settings
+      - ALLOWED_ORIGINS=*
+      - DEFAULT_MODEL=lightgbm
+
+      # Security (generate your own in production!)
+      - SECRET_KEY=dev-secret-key-change-in-production
+
+      # HuggingFace token (set in .env file)
+      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN:-}
+
+    env_file:
+      - .env  # Load from .env file if exists
+
+    volumes:
+      # Mount for development hot-reload (comment out for production-like testing)
+      # - ./app:/app/app
+      # - ./models:/app/models
+      # - ./libs:/app/libs
+      pass
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    restart: unless-stopped
+
+    # Resource limits (adjust based on your needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+networks:
+  default:
+    name: vietnam-house-network
