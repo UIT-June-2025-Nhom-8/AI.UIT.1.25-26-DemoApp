@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Mail, Users, Lightbulb, Target, Rocket, Database, Brain, BarChart3, Server } from 'lucide-react'
+import { Mail, Users, Lightbulb, Target, Rocket, Database, Brain, BarChart3, Server, Github } from 'lucide-react'
 
 interface TeamMember {
   name: string
@@ -106,7 +106,7 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 100,
     },
   },
@@ -219,7 +219,7 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
           >
-            {teamMembers.map((member, index) => (
+            {teamMembers.map((member) => (
               <motion.div key={member.studentId} variants={itemVariants}>
                 <motion.div
                   whileHover={{ y: -10, scale: 1.05 }}
@@ -325,7 +325,7 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto"
           >
-            {modules.map((module, index) => {
+            {modules.map((module) => {
               const Icon = module.icon
               return (
                 <motion.div key={module.title} variants={itemVariants}>
@@ -400,7 +400,21 @@ export function AboutPage() {
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-400 mb-2">Đồ Án Cuối Kỳ - CS106.TTNT</p>
           <p className="text-gray-500 mb-4">Trường Đại Học Công Nghệ Thông Tin - UIT</p>
-          <p className="text-gray-600 text-sm">© 2025 - Vietnam Housing Price Prediction System</p>
+
+          {/* GitHub Link */}
+          <motion.a
+            href="https://github.com/UIT-June-2025-Nhom-8/AI.UIT.1.25-26"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium shadow-lg hover:shadow-purple-500/50 transition-all mb-4"
+          >
+            <Github className="w-5 h-5" />
+            <span>View on GitHub</span>
+          </motion.a>
+
+          <p className="text-gray-600 text-sm mt-4">© 2025 - Vietnam Housing Price Prediction System</p>
         </div>
       </footer>
     </div>
