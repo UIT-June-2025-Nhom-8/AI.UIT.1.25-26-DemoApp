@@ -4,6 +4,7 @@ import { Edit3, TrendingUp, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import type { HouseFeatures, PredictionResponse, EnsemblePredictionResponse } from '@/types'
@@ -43,7 +44,18 @@ export function FeatureFormStep({ initialFeatures, onPredictionComplete, onBack 
     }
   }
 
+  // Supported cities (82% of training data)
+  const SUPPORTED_CITIES = ['Hồ Chí Minh', 'Hà Nội', 'Bình Dương', 'Đà Nẵng']
+
   const formFields = [
+    {
+      key: 'City',
+      label: 'Thành phố',
+      type: 'select',
+      required: false,
+      options: SUPPORTED_CITIES,
+      helperText: '💡 Model được tối ưu cho 4 thành phố này'
+    },
     { key: 'Area', label: 'Diện tích (m²)', type: 'number', required: true },
     { key: 'Bedrooms', label: 'Số phòng ngủ', type: 'number', required: false },
     { key: 'Bathrooms', label: 'Số toilet', type: 'number', required: false },
@@ -95,14 +107,38 @@ export function FeatureFormStep({ initialFeatures, onPredictionComplete, onBack 
                   {field.label}
                   {field.required && <span className="text-destructive ml-1">*</span>}
                 </Label>
-                <Input
-                  id={field.key}
-                  type={field.type}
-                  value={features[field.key] ?? ''}
-                  onChange={(e) => handleChange(field.key, field.type === 'number' ? parseFloat(e.target.value) || '' : e.target.value)}
-                  disabled={loading}
-                  placeholder={field.label}
-                />
+
+                {field.type === 'select' ? (
+                  <Select
+                    value={features[field.key] ?? 'Hồ Chí Minh'}
+                    onValueChange={(value) => handleChange(field.key, value)}
+                    disabled={loading}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={field.label} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {field.options?.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <Input
+                    id={field.key}
+                    type={field.type}
+                    value={features[field.key] ?? ''}
+                    onChange={(e) => handleChange(field.key, field.type === 'number' ? parseFloat(e.target.value) || '' : e.target.value)}
+                    disabled={loading}
+                    placeholder={field.label}
+                  />
+                )}
+
+                {field.helperText && (
+                  <p className="text-xs text-muted-foreground">{field.helperText}</p>
+                )}
               </div>
             ))}
           </div>

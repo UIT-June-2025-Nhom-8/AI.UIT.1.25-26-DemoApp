@@ -21,6 +21,7 @@ import {
   LEGAL_STATUSES,
   FURNITURE_STATES,
   ALL_DISTRICTS,
+  CITIES,
 } from '@/constants/validValues'
 
 export function PredictPage() {
@@ -125,6 +126,7 @@ export function PredictPage() {
   }
 
   const formFields = [
+    { key: 'City', label: 'Thành phố', type: 'select', required: false, options: CITIES, helperText: 'Model được tối ưu cho 4 thành phố này' },
     { key: 'Area', label: 'Diện tích (m²)', type: 'number', required: true },
     { key: 'Bedrooms', label: 'Số phòng ngủ', type: 'number', required: false },
     { key: 'Bathrooms', label: 'Số toilet', type: 'number', required: false },
@@ -319,6 +321,9 @@ export function PredictPage() {
                                 placeholder={field.label}
                                 className="bg-muted/30 border-2 focus:border-primary rounded-xl h-11 text-[15px]"
                               />
+                            )}
+                            {field.helperText && (
+                              <p className="text-xs text-muted-foreground">{field.helperText}</p>
                             )}
                           </div>
                         )

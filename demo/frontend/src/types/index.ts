@@ -22,6 +22,7 @@ export interface ParseResponse {
 }
 
 export interface HouseFeatures {
+  City?: string          // Thành phố (Hồ Chí Minh, Hà Nội, Bình Dương, Đà Nẵng)
   Area?: number
   Bedrooms?: number
   Bathrooms?: number
