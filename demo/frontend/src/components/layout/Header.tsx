@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
-import { Home, LogOut } from 'lucide-react'
+import { Home, LogOut, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store/authStore'
 import { authAPI } from '@/lib/api'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 export function Header() {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleLogout = async () => {
     try {
@@ -19,6 +20,8 @@ export function Header() {
       navigate('/login')
     }
   }
+
+  const isActive = (path: string) => location.pathname === path
 
   return (
     <motion.header
@@ -64,6 +67,25 @@ export function Header() {
               <LogOut className="w-4 h-4 mr-2" />
               Đăng xuất
             </Button>
+            <Link to="/about">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`rounded-xl border font-semibold transition-all ${
+                    isActive('/about')
+                      ? 'bg-primary text-white border-primary hover:bg-primary/90'
+                      : 'hover:bg-muted/50'
+                  }`}
+                >
+                  <Info className="w-4 h-4 mr-2" />
+                  Giới Thiệu
+                </Button>
+              </motion.div>
+            </Link>
           </div>
         )}
       </div>
