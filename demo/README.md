@@ -15,13 +15,32 @@ Hệ thống dự đoán giá nhà sử dụng Machine Learning với giao diệ
 demo/
 ├── backend/          # FastAPI Backend
 │   ├── app/
-│   ├── models/
+│   │   ├── api/           # API routes & endpoints
+│   │   ├── core/          # Authentication & config
+│   │   ├── schemas/       # Pydantic models
+│   │   ├── services/      # Business logic
+│   │   └── main.py        # FastAPI app
+│   ├── models/            # Trained ML models
+│   ├── libs/              # ML preprocessing & utilities
 │   └── requirements.txt
-└── frontend/         # React + TypeScript Frontend
-    ├── src/
-    ├── package.json
-    └── vite.config.ts
+├── frontend/         # React + TypeScript Frontend
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
+│   │   ├── lib/           # API client
+│   │   └── App.tsx
+│   ├── package.json
+│   └── vite.config.ts
+└── ARCHITECTURE.md   # 📐 Architecture Design Document
 ```
+
+## 🏗️ Architecture Design
+
+Xem tài liệu chi tiết về kiến trúc hệ thống tại: **[ARCHITECTURE.md](./ARCHITECTURE.md)**
+
+Hoặc xem trực quan trên trang **About** của ứng dụng:
+- Local: http://localhost:5173/about
+- Production: https://ai-uit-1-25-26-demoapp-1.onrender.com/about
 
 ## 🚀 Hướng Dẫn Chạy Local
 

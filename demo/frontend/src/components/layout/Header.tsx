@@ -30,20 +30,24 @@ export function Header() {
       className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/95 shadow-sm"
     >
       <div className="max-w-[1400px] mx-auto px-8 flex h-20 items-center justify-between">
-        {/* Logo Section */}
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg shadow-primary/25">
+        {/* Logo Section - Clickable */}
+        <Link to="/predict" className="flex items-center gap-4 cursor-pointer group">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-11 h-11 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-shadow"
+          >
             <Home className="w-6 h-6 text-white stroke-[2.5]" />
-          </div>
+          </motion.div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground tracking-tight">
+            <h1 className="text-2xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
               House Price Predictor
             </h1>
             <p className="text-sm text-muted-foreground font-medium">
               Dự đoán giá nhà với AI
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* User Section */}
         {user && (

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
-import { Mail, Users, Lightbulb, Target, Rocket, Database, Brain, BarChart3, Server, Github } from 'lucide-react'
+import { Mail, Users, Lightbulb, Target, Rocket, Database, Brain, BarChart3, Server, Github, ArrowLeft } from 'lucide-react'
+import { ArchitectureDiagram } from '../components/about/ArchitectureDiagram'
+import { Link } from 'react-router-dom'
 
 interface TeamMember {
   name: string
@@ -115,6 +117,20 @@ const itemVariants = {
 export function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Back to Home Button */}
+      <div className="container mx-auto px-6 pt-8">
+        <Link to="/predict">
+          <motion.button
+            whileHover={{ scale: 1.05, x: -5 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-lg rounded-full text-white font-medium border border-white/20 hover:bg-white/20 transition-all shadow-lg"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Quay về Trang chủ</span>
+          </motion.button>
+        </Link>
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         {/* Animated Background */}
@@ -313,7 +329,7 @@ export function AboutPage() {
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <Rocket className="w-8 h-8 text-purple-400" />
-              <h2 className="text-5xl font-bold text-white">Kiến Trúc Hệ Thống</h2>
+              <h2 className="text-5xl font-bold text-white">Các Module Chính</h2>
             </div>
             <div className="h-1 w-24 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </motion.div>
@@ -349,6 +365,13 @@ export function AboutPage() {
               )
             })}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Architecture Design Section */}
+      <section className="py-20 relative bg-gradient-to-b from-transparent via-purple-900/10 to-transparent">
+        <div className="container mx-auto px-6">
+          <ArchitectureDiagram />
         </div>
       </section>
 
